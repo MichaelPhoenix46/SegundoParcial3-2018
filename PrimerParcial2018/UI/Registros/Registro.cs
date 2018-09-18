@@ -39,6 +39,7 @@ namespace PrimerParcial2018.UI.Registros
             }
             if (RetencionnumericUpDown.Value == 0)
             {
+
                 VendedoreserrorProvider.SetError(RetencionnumericUpDown, "Si los campos de sueldo y porciento estan llenos, debe dar click en la flecha de retencion para llenarla");
             }
 
