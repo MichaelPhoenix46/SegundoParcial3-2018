@@ -23,12 +23,13 @@ namespace PrimerParcial2018.UI.Registros
 
         private bool Validar()
         {
-            bool errores = false;
+            bool errores = false; 
 
             if (string.IsNullOrEmpty(NombretextBox.Text))
             {
                 VendedoreserrorProvider.SetError(NombretextBox, "Llenar el nombre");
                 errores = true;
+                
             }
 
             if (SueldonumericUpDown.Value == 0 || PorRetencionnumericUpDown.Value == 0)

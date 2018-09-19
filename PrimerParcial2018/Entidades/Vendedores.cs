@@ -15,6 +15,7 @@ namespace PrimerParcial2018.Entidades
         public decimal Sueldo { get; set; }
         public decimal PorRetencion { get; set; }
         public decimal Retencion { get; set; }
+        public DateTime Fecha { get; set; }
 
         public Vendedores()
         {
@@ -23,6 +24,7 @@ namespace PrimerParcial2018.Entidades
             Sueldo = 0;
             PorRetencion = 0;
             Retencion = 0;
+            Fecha = DateTime.Now;
         }
 
     }

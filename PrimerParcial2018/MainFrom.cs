@@ -1,4 +1,5 @@
 ﻿using PrimerParcial2018.UI.Registros;
+using PrimerParcial2018.UI.Consultas;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,6 +23,13 @@ namespace PrimerParcial2018
         {
             Registro registro = new Registro();
             registro.Show();
+        }
+
+        private void consultaDeVendedoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CVendedores vendedores = new CVendedores();
+            vendedores.Show();
+
         }
     }
 }

@@ -1,5 +1,4 @@
 Create database PrimerParcialDb
-go
 use PrimerParcialDb
 go
 create table Vendedores
@@ -8,7 +7,8 @@ create table Vendedores
 	Nombres varchar(30),
 	Sueldo decimal,
 	PorRetencion decimal,
-	Retencion decimal
+	Retencion decimal,
+	Fecha datetime
 
 
 )
