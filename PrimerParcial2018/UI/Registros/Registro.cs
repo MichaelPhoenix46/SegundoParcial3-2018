@@ -120,7 +120,7 @@ namespace PrimerParcial2018.UI.Registros
             {
                 
                 RetencionnumericUpDown.Value = VendedoresBLL.CalculoRetencion(SueldonumericUpDown.Value, PorRetencionnumericUpDown.Value);
-                RetenciontextBox.Text = Convert.ToString(RetencionnumericUpDown.Value); 
+                
 
             }
             else
