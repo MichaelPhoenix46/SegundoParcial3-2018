@@ -45,6 +45,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.VendedoreserrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.RetencionnumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.RetenciontextBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.VendedornumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SueldonumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PorRetencionnumericUpDown)).BeginInit();
@@ -107,7 +108,7 @@
             // VendedornumericUpDown
             // 
             this.VendedornumericUpDown.Location = new System.Drawing.Point(103, 46);
-            this.VendedornumericUpDown.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.VendedornumericUpDown.Margin = new System.Windows.Forms.Padding(4);
             this.VendedornumericUpDown.Name = "VendedornumericUpDown";
             this.VendedornumericUpDown.Size = new System.Drawing.Size(133, 22);
             this.VendedornumericUpDown.TabIndex = 12;
@@ -117,7 +118,7 @@
             // 
             this.SueldonumericUpDown.DecimalPlaces = 2;
             this.SueldonumericUpDown.Location = new System.Drawing.Point(80, 222);
-            this.SueldonumericUpDown.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.SueldonumericUpDown.Margin = new System.Windows.Forms.Padding(4);
             this.SueldonumericUpDown.Maximum = new decimal(new int[] {
             1215752191,
             23,
@@ -132,7 +133,7 @@
             // 
             this.PorRetencionnumericUpDown.DecimalPlaces = 2;
             this.PorRetencionnumericUpDown.Location = new System.Drawing.Point(293, 247);
-            this.PorRetencionnumericUpDown.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.PorRetencionnumericUpDown.Margin = new System.Windows.Forms.Padding(4);
             this.PorRetencionnumericUpDown.Name = "PorRetencionnumericUpDown";
             this.PorRetencionnumericUpDown.Size = new System.Drawing.Size(87, 22);
             this.PorRetencionnumericUpDown.TabIndex = 15;
@@ -170,7 +171,7 @@
             // NombretextBox
             // 
             this.NombretextBox.Location = new System.Drawing.Point(92, 121);
-            this.NombretextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.NombretextBox.Margin = new System.Windows.Forms.Padding(4);
             this.NombretextBox.Multiline = true;
             this.NombretextBox.Name = "NombretextBox";
             this.NombretextBox.Size = new System.Drawing.Size(213, 48);
@@ -203,7 +204,7 @@
             // RetencionnumericUpDown
             // 
             this.RetencionnumericUpDown.DecimalPlaces = 2;
-            this.RetencionnumericUpDown.Location = new System.Drawing.Point(103, 279);
+            this.RetencionnumericUpDown.Location = new System.Drawing.Point(366, 283);
             this.RetencionnumericUpDown.Margin = new System.Windows.Forms.Padding(4);
             this.RetencionnumericUpDown.Maximum = new decimal(new int[] {
             -727379969,
@@ -212,15 +213,24 @@
             0});
             this.RetencionnumericUpDown.Name = "RetencionnumericUpDown";
             this.RetencionnumericUpDown.ReadOnly = true;
-            this.RetencionnumericUpDown.Size = new System.Drawing.Size(276, 22);
+            this.RetencionnumericUpDown.Size = new System.Drawing.Size(13, 22);
             this.RetencionnumericUpDown.TabIndex = 14;
+            this.RetencionnumericUpDown.Visible = false;
             this.RetencionnumericUpDown.ValueChanged += new System.EventHandler(this.RetencionnumericUpDown_ValueChanged);
+            // 
+            // RetenciontextBox
+            // 
+            this.RetenciontextBox.Location = new System.Drawing.Point(92, 283);
+            this.RetenciontextBox.Name = "RetenciontextBox";
+            this.RetenciontextBox.Size = new System.Drawing.Size(280, 22);
+            this.RetenciontextBox.TabIndex = 22;
             // 
             // Registro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(395, 450);
+            this.Controls.Add(this.RetenciontextBox);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.NombretextBox);
@@ -265,5 +275,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ErrorProvider VendedoreserrorProvider;
         private System.Windows.Forms.NumericUpDown RetencionnumericUpDown;
+        private System.Windows.Forms.TextBox RetenciontextBox;
     }
 }
