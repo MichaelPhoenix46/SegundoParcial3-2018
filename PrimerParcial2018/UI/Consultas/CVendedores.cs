@@ -41,6 +41,7 @@ namespace PrimerParcial2018.UI.Consultas
                     filtro = x => x.Sueldo == Sueldo
                     && (x.Fecha >= DesdedateTimePicker.Value && x.Fecha <= HastadateTimePicker.Value);
                     break;
+
                 case 3:// Retencion Total
                     decimal retencion = Convert.ToDecimal(CriteriotextBox.Text);
                     filtro = x => x.Retencion == retencion
