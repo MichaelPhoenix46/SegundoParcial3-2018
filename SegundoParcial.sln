@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2042
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrimerParcial2018", "PrimerParcial2018\PrimerParcial2018.csproj", "{9B26BFC3-7D59-4D37-95B3-602223930C28}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SegundoParcial", "PrimerParcial2018\SegundoParcial.csproj", "{9B26BFC3-7D59-4D37-95B3-602223930C28}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
