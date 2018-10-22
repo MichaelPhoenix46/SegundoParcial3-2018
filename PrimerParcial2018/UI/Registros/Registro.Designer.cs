@@ -237,7 +237,7 @@
             this.Controls.Add(this.Buscarbutton);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Registro";
-            this.Text = "Form1";
+            this.Text = "Registro de Vendedores";
             ((System.ComponentModel.ISupportInitialize)(this.VendedornumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SueldonumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PorRetencionnumericUpDown)).EndInit();

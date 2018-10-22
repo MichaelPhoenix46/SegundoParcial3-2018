@@ -61,6 +61,7 @@ namespace PrimerParcial2018.UI.Consultas
             }
             ConsultadataGridView.DataSource = BLL.VendedoresBLL.GetList(filtro);
             CriteriotextBox.Clear();
+
         }
 
 
