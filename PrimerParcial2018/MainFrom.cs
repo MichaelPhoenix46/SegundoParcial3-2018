@@ -31,5 +31,11 @@ namespace PrimerParcial2018
             vendedores.Show();
 
         }
+
+        private void registroDeMetasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Rmetas registro = new Rmetas();
+            registro.Show();
+        }
     }
 }

@@ -11,6 +11,7 @@ namespace PrimerParcial2018.DAL
     public class Contexto : DbContext
     {
         public DbSet<Vendedores> Vendededores { get; set; }
+        public DbSet<Metas> Metas { get; set; }
         public Contexto() : base("ConStr")
         { }
     }

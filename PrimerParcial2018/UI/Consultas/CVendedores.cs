@@ -52,16 +52,16 @@ namespace PrimerParcial2018.UI.Consultas
                     filtro = x => x.PorRetencion == PorRetencion
                     && (x.Fecha >= DesdedateTimePicker.Value && x.Fecha <= HastadateTimePicker.Value);
                     break;
-                case 5: //Todo
+                /*case 5: //Todo
                     filtro = x => true;
                     if (BLL.VendedoresBLL.GetList(filtro).Count() == 0)
                     {
                         MessageBox.Show("Base de datos Vacia", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-                    break;
+                    break;*/
             }
-            ConsultadataGridView.DataSource = BLL.VendedoresBLL.GetList(filtro);
-            CriteriotextBox.Clear();
+           /* ConsultadataGridView.DataSource = BLL.VendedoresBLL.GetList(filtro);
+            CriteriotextBox.Clear();*/
 
         }
 

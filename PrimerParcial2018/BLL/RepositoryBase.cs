@@ -12,9 +12,9 @@ namespace PrimerParcial2018.BLL
     public class RepositorioBase<T> : IDisposable, IRepository<T> where T : class
     {
         internal Contexto _contexto;
-        public RepositorioBase(Contexto contexto)
+        public RepositorioBase()
         {
-            _contexto = contexto;
+            _contexto = new Contexto();
         }
 
         public virtual T Buscar(int id)
@@ -34,7 +34,7 @@ namespace PrimerParcial2018.BLL
 
         }
 
-        public virtual bool ELiminar(int id)
+        public virtual bool Eliminar(int id)
         {
             bool paso = false;
 
@@ -86,7 +86,7 @@ namespace PrimerParcial2018.BLL
 
         public virtual bool Modificar(T entity)
         {
-            RepositorioBase<Vendedores> repositorio = new RepositorioBase<Vendedores>(new Contexto());
+            RepositorioBase<Vendedores> repositorio = new RepositorioBase<Vendedores>();
             bool paso = false;
             _contexto = new Contexto();
             try

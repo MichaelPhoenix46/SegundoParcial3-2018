@@ -17,6 +17,9 @@ namespace PrimerParcial2018.Entidades
         public decimal Retencion { get; set; }
         public DateTime Fecha { get; set; }
 
+        public virtual List<MetasDetalle> Metas { get; set; }
+
+
         public Vendedores()
         {
             Vendedorid = 0;
@@ -25,6 +28,7 @@ namespace PrimerParcial2018.Entidades
             PorRetencion = 0;
             Retencion = 0;
             Fecha = DateTime.Now;
+            Metas = new List<MetasDetalle>();
         }
 
     }

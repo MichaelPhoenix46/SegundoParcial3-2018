@@ -14,12 +14,21 @@ namespace PrimerParcial2018.UI.Registros
 {
     public partial class Registro : Form
     {
+        private RepositorioBase<Vendedores> repositorio;
+        public List<MetasDetalle> Detalle { get; set; }
         public Registro()
         {
             InitializeComponent();
+            this.Detalle = new List<MetasDetalle>();
+
+        }
+        private void CargarGrid()
+        {
+            DetalledataGridView.DataSource = null;
+            DetalledataGridView.DataSource = this.Detalle;
         }
 
-        
+
 
         private bool Validar()
         {
@@ -50,6 +59,13 @@ namespace PrimerParcial2018.UI.Registros
             return errores;
         }
 
+        private bool ExisteEnLaBaseDeDatos()
+        {
+            repositorio = new RepositorioBase<Vendedores>();
+            Vendedores vendedor = repositorio.Buscar((int)VendedornumericUpDown.Value);
+            return (vendedor != null);
+        }
+
         private void Limpiar()
         {
 
@@ -60,9 +76,11 @@ namespace PrimerParcial2018.UI.Registros
             RetencionnumericUpDown.Value = 0;
 
             VendedoreserrorProvider.Clear();
+            this.Detalle = new List<MetasDetalle>();
+            CargarGrid();
         }
 
-        private Vendedores Llenaclase()
+        public Vendedores Llenaclase()
         {
             Vendedores vendedores = new Vendedores();
             vendedores.Vendedorid = Convert.ToInt32(VendedornumericUpDown.Value);
@@ -71,42 +89,58 @@ namespace PrimerParcial2018.UI.Registros
             vendedores.Retencion = RetencionnumericUpDown.Value;
             vendedores.PorRetencion = PorRetencionnumericUpDown.Value;
 
+            vendedores.Metas = this.Detalle;
             return vendedores;
         }
+        private void LlenaCampo(Vendedores vendedor)
+        {
+            VendedornumericUpDown.Value = vendedor.Vendedorid;
+            NombretextBox.Text = vendedor.Nombres;
+            SueldonumericUpDown.Value = Convert.ToDecimal(vendedor.Sueldo);
+            RetencionnumericUpDown.Value = Convert.ToDecimal(vendedor.PorRetencion);
+            RetencionnumericUpDown.Value = vendedor.PorRetencion;
+            FechadateTimePicker.Value = vendedor.Fecha;
+
+            this.Detalle = vendedor.Metas;
+            CargarGrid();
+        }
+
+        private void LlenarComboBox()
+        {
+            RepositorioBase<Metas> metas = new RepositorioBase<Metas>();
+            MetacomboBox.DataSource = metas.GetList(x => true);
+            MetacomboBox.ValueMember = "MetaId";
+            MetacomboBox.DisplayMember = "MetaId";
+        }
+
 
 
         private void Guardarbutton_Click(object sender, EventArgs e)
         {
-            if (Validar())
-            {
-                MessageBox.Show("llenar el campo vacio", "trate de guardar de nuevo",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+            repositorio = new RepositorioBase<Vendedores>();
+            Vendedores vendedor;
+            bool paso = false;
+            if (!Validar())
+                return;
+
+            vendedor = Llenaclase();
+            if (VendedornumericUpDown.Value == 0)
+                paso = repositorio.Guardar(vendedor);
             else
             {
-                Vendedores vendedores = Llenaclase();
-                bool paso = false;
-
-                if (VendedornumericUpDown.Value == 0)
+                if (!ExisteEnLaBaseDeDatos())
                 {
-                    paso = VendedoresBLL.Guardar(vendedores);
+                    return;
                 }
-                else
-                {
-                    paso = VendedoresBLL.Modificar(vendedores);
-                }
-
-                if (paso)
-                {
-                    MessageBox.Show("Se ha guardado", "aceptado",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    MessageBox.Show("No se ha modificado", "error",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
+                paso = repositorio.Modificar(vendedor);
             }
+            if (paso)
+            {
+                MessageBox.Show("Vendedor Guardado!!", "Exito!!!!!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Limpiar();
+            }
+            else
+                MessageBox.Show("No Se Pudo Guardar!!", "Fallo!!!!!", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void RetencionnumericUpDown_ValueChanged(object sender, EventArgs e)
@@ -119,7 +153,7 @@ namespace PrimerParcial2018.UI.Registros
             if (SueldonumericUpDown.Value != 0 && PorRetencionnumericUpDown.Value != 0)
             {
                 
-                RetencionnumericUpDown.Value = VendedoresBLL.CalculoRetencion(SueldonumericUpDown.Value, PorRetencionnumericUpDown.Value);
+                RetencionnumericUpDown.Value = SueldonumericUpDown.Value * (PorRetencionnumericUpDown.Value/100);
                 
 
             }
@@ -133,24 +167,21 @@ namespace PrimerParcial2018.UI.Registros
 
         private void Eliminarbutton_Click(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(VendedornumericUpDown.Value);
-            if (VendedoresBLL.Eliminar(id))
-
-            {
-                MessageBox.Show("eliminado", "exitosamente",
-                      MessageBoxButtons.OK, MessageBoxIcon.Information);
-                VendedornumericUpDown.Value = 0;
-                NombretextBox.Clear();
-                SueldonumericUpDown.Value = 0;
-                PorRetencionnumericUpDown.Value = 0;
-            }
-            else
-            {
-                MessageBox.Show("no fue eliminado", "trate de nuevo",
-                      MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+            repositorio = new RepositorioBase<Vendedores>();
             VendedoreserrorProvider.Clear();
-           
+            int id;
+            int.TryParse(VendedornumericUpDown.Text, out id);
+
+            if (!ExisteEnLaBaseDeDatos())
+            {
+                VendedoreserrorProvider.SetError(VendedornumericUpDown, "No puedes Borrar Un Vendedor Inexistente");
+                return;
+            }
+            if (repositorio.Eliminar(id))
+            {
+                Limpiar();
+                MessageBox.Show("Vendedor Eliminado!!", "Exito!!!!!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void Nuevobutton_Click(object sender, EventArgs e)
@@ -158,35 +189,76 @@ namespace PrimerParcial2018.UI.Registros
             Limpiar();
         }
 
-        private void VendedornumericUpDown_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void Buscarbutton_Click(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(VendedornumericUpDown.Value);
-            Vendedores vendedores = VendedoresBLL.Buscar(id);
+            int id;
+            repositorio = new RepositorioBase<Vendedores>();
+            Vendedores vendedor = new Vendedores();
+            int.TryParse(VendedornumericUpDown.Text, out id);
 
-            if (vendedores != null)
-            {                
-                NombretextBox.Text = vendedores.Nombres;
-                SueldonumericUpDown.Value = vendedores.Sueldo;
-                PorRetencionnumericUpDown.Value = vendedores.PorRetencion;
-                RetencionnumericUpDown.Value = vendedores.Retencion;
+            vendedor = repositorio.Buscar(id);
+
+            if (vendedor != null)
+            {
+                VendedoreserrorProvider.Clear();
+                
+                MessageBox.Show("Vendedor Encontrado!!!", "Exito!!!", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
-            {
-                MessageBox.Show("no se encontro", "buscar de nuevo",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+                MessageBox.Show("Vendedor no Encontrado!!!", "Fallo!!!", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void SueldonumericUpDown_ValueChanged(object sender, EventArgs e)
         {
 
         }
+
+        private void PorRetencionnumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void NombretextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void VendedornumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Agregarbutton_Click(object sender, EventArgs e)
+        {
+            if (DetalledataGridView.DataSource != null)
+                this.Detalle = (List<MetasDetalle>)DetalledataGridView.DataSource;
+            this.Detalle.Add(
+                new MetasDetalle(
+                    detallesid: 0,
+                    metaid: MetacomboBox.SelectedIndex,
+                    vendedorid: (int)VendedornumericUpDown.Value,
+                    cuota: Convert.ToDecimal(CuotasnumericUpDown.Value)
+
+                    )
+                );
+            VendedoreserrorProvider.Clear();
+            CargarGrid();
+        }
+
+        private void Removerbutton_Click(object sender, EventArgs e)
+        {
+            if (DetalledataGridView.Rows.Count > 0 && DetalledataGridView.CurrentRow != null)
+            {
+                this.Detalle.RemoveAt(DetalledataGridView.CurrentRow.Index);
+                CargarGrid();
+            }
+        
+        }
+
+
     }
+
 
 
 

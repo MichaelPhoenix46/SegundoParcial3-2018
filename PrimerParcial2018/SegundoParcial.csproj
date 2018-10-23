@@ -69,8 +69,9 @@
   <ItemGroup>
     <Compile Include="BLL\IRepository.cs" />
     <Compile Include="BLL\RepositoryBase.cs" />
-    <Compile Include="BLL\VendedoresBLL.cs" />
     <Compile Include="DAL\Contexto.cs" />
+    <Compile Include="Entidades\Metas.cs" />
+    <Compile Include="Entidades\MetasDetalle.cs" />
     <Compile Include="Entidades\Vendedores.cs" />
     <Compile Include="MainFrom.cs">
       <SubType>Form</SubType>
@@ -92,6 +93,12 @@
     <Compile Include="UI\Registros\Registro.Designer.cs">
       <DependentUpon>Registro.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Registros\Rmetas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Registros\Rmetas.Designer.cs">
+      <DependentUpon>Rmetas.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="MainFrom.resx">
       <DependentUpon>MainFrom.cs</DependentUpon>
     </EmbeddedResource>
@@ -109,6 +116,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Registros\Registro.resx">
       <DependentUpon>Registro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Registros\Rmetas.resx">
+      <DependentUpon>Rmetas.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

@@ -13,6 +13,6 @@ namespace PrimerParcial2018.BLL
         T Buscar(int Id);
         bool Guardar(T entity);
         bool Modificar(T entity);
-        bool ELiminar(int id);
+        bool Eliminar(int id);
     }
 }
